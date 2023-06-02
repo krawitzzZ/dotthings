@@ -1,0 +1,4 @@
+reporting: "off"
+gui:
+  language: "en"
+  returnImmediately: true

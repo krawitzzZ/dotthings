@@ -1,0 +1,154 @@
+[language-server.eslint]
+command = "eslint"
+
+# used to trim whitespace from config files
+[[language]]
+name = "gdscript"
+formatter = { command = "git", args = ["stripspace"] }
+file-types = [
+  "Makefile",
+  ".gitignore",
+  ".gitattributes",
+  ".gitmodules",
+  ".env",
+  ".conf",
+  ".config",
+  ".cabal",
+  { suffix = ".config" },
+  { suffix = ".git/config" },
+]
+language-server = { command = "nc", args = [
+  "localhost",
+  "6005",
+], language-id = "gdscript" }
+
+[[language]]
+name = "json"
+auto-format = false
+config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
+# formatter = { command = "prettier", args = [ "--config-precedence", "prefer-file", "--stdin-filepath", "file.json"] } default is more relaxed
+
+[[language]]
+name = "html"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.html",
+] }
+
+[[language]]
+name = "css"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.css",
+] }
+
+[[language]]
+name = "scss"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.scss",
+] }
+
+[[language]]
+name = "markdown"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.md",
+] }
+
+[[language]]
+name = "toml"
+auto-format = false
+formatter = { command = "taplo", args = ["fmt", "-"] }
+
+[[language]]
+name = "yaml"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.yaml",
+] }
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true
+[language-server.yaml-language-server.config.yaml.schemas]
+"https://json.schemastore.org/github-workflow.json" = ".github/workflows/*.{yml,yaml}"
+"https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-tasks.json" = "roles/{tasks,handlers}/*.{yml,yaml}"
+
+[[language]]
+name = "javascript"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.js",
+] }
+
+[[language]]
+name = "jsx"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.jsx",
+] }
+
+[[language]]
+name = "typescript"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.ts",
+] }
+# FIXME: Multiple language servers are merged to main, but not released yet!
+# language-server = [ "typescript-language-server", "eslint" ]
+
+[[language]]
+name = "tsx"
+auto-format = false
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.tsx",
+] }
+# FIXME: Multiple language servers are merged to main, but not released yet!
+# language-server = [ "typescript-language-server", "eslint" ]
+
+[[language]]
+name = "python"
+auto-format = false
+roots = ["pyproject.toml"]
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+config = {}
+
+[[language]]
+name = "haskell"
+auto-format = false
+formatter = { command = "stylish-haskell" }
+[language-server.haskell-language-server.config]
+haskell.plugin.rename.config.diff = true
+
+[[language]]
+name = "rust"
+auto-format = true
+[language-server.rust-analyzer.config.check]
+command = "clippy"

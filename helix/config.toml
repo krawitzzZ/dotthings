@@ -1,0 +1,188 @@
+theme = "github_light_custom"
+
+[editor]
+scrolloff = 7
+line-number = "relative"
+bufferline = "multiple"
+mouse = false
+undercurl = true
+true-color = true
+color-modes = true
+middle-click-paste = false
+cursorline = true
+cursorcolumn = false
+auto-format = false
+auto-save = true
+rulers = []
+
+[editor.statusline]
+left = [
+  "mode",
+  "spacer",
+  "spinner",
+  "spacer",
+  "selections",
+  "workspace-diagnostics",
+]
+center = ["file-modification-indicator", "file-name", "spacer", "diagnostics"]
+right = [
+  "position",
+  "total-line-numbers",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+]
+separator = "│"
+mode = { normal = "NORMAL", insert = "INSERT", select = "SELECT" }
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+
+[editor.file-picker]
+hidden = false
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+
+[editor.whitespace]
+render = "all"
+
+[editor.indent-guides]
+render = true
+character = "┊" # "╎", "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[editor.soft-wrap]
+enable = false
+
+# BINDINGS
+
+## INSERT
+
+[keys.insert]
+up = "no_op"
+down = "no_op"
+left = "no_op"
+right = "no_op"
+pageup = "no_op"
+pagedown = "no_op"
+home = "no_op"
+end = "no_op"
+C-A-o = ":open ~/.config/helix/config.toml"
+C-A-l = ":open ~/.config/helix/languages.toml"
+C-s = ":w"
+C-space = "completion"
+C-e = "scroll_down"
+C-y = "scroll_up"
+A-q = ":buffer-close"
+A-w = "goto_first_nonwhitespace"
+A-e = ["goto_line_end", "move_char_right"]
+A-h = "move_char_left"
+A-j = "move_visual_line_down"
+A-k = "move_visual_line_up"
+A-l = "move_char_right"
+
+## NORMAL
+
+[keys.normal]
+"`" = ["keep_primary_selection", "collapse_selection", "normal_mode"]
+C-A-o = ":open ~/.config/helix/config.toml"
+C-A-l = ":open ~/.config/helix/languages.toml"
+C-s = ":w"
+A-q = ":buffer-close"
+A-m = "match_brackets"
+K = "hover"
+"=" = "switch_to_lowercase"
+"+" = "switch_to_uppercase"
+G = "goto_last_line"
+V = ["select_mode", "extend_to_line_bounds"]
+y = ["yank", "collapse_selection"]
+Y = ["extend_to_line_bounds", "yank", "collapse_selection"]
+D = ["extend_to_line_bounds", "delete_selection"]
+C-q = "goto_first_nonwhitespace"
+C-t = "goto_line_end"
+C-e = "scroll_down"
+C-y = "scroll_up"
+A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+A-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before",
+]
+tab = "goto_next_buffer"
+C-tab = "goto_previous_buffer"
+C-h = "jump_view_left"
+C-j = "jump_view_down"
+C-k = "jump_view_up"
+C-l = "jump_view_right"
+C-o = "wonly"
+C-w = { C-h = "swap_view_left", C-j = "swap_view_down", C-k = "swap_view_up", C-l = "swap_view_right" }
+g = { s = "symbol_picker", S = "workspace_symbol_picker" }
+
+[keys.normal."space"]
+q = "wclose"
+s = ":w"
+S = ":wa"
+c = "toggle_comments"
+f = ":format"
+F = "no_op"
+o = { f = "file_picker", F = "file_picker_in_current_directory" }
+t = { l = ":theme github_light_custom", d = ":theme github_dark_custom" }
+
+## SELECT
+
+[keys.select]
+"`" = ["keep_primary_selection", "collapse_selection", "normal_mode"]
+C-A-o = ":open ~/.config/helix/config.toml"
+C-A-l = ":open ~/.config/helix/languages.toml"
+C-s = ":w"
+A-q = ":buffer-close"
+A-m = "match_brackets"
+"=" = "switch_to_lowercase"
+"+" = "switch_to_uppercase"
+G = "goto_last_line"
+V = ["select_mode", "extend_to_line_bounds"]
+y = ["yank", "collapse_selection"]
+Y = ["extend_to_line_bounds", "yank", "collapse_selection"]
+D = ["extend_to_line_bounds", "delete_selection"]
+C-q = "goto_first_nonwhitespace"
+C-t = "goto_line_end"
+C-e = "scroll_down"
+C-y = "scroll_up"
+A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+A-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before",
+]
+tab = "goto_next_buffer"
+C-tab = "goto_previous_buffer"
+C-h = "jump_view_left"
+C-j = "jump_view_down"
+C-k = "jump_view_up"
+C-l = "jump_view_right"
+C-o = "wonly"
+C-w = { C-h = "swap_view_left", C-j = "swap_view_down", C-k = "swap_view_up", C-l = "swap_view_right" }
+
+[keys.select."space"]
+q = "wclose"
+s = ":w"
+S = ":wa"
+c = "toggle_comments"
+f = ":format"
+F = "no_op"
+o = { f = "file_picker", F = "file_picker_in_current_directory" }
+t = { l = ":theme github_light_custom", d = ":theme github_dark_custom" }
