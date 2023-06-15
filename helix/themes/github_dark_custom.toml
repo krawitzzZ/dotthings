@@ -5,7 +5,11 @@
 
 attribute = { fg = "fg.default", modifiers = ["italic"] }
 keyword = { fg = "scale.red.3", modifiers = ["italic"] }
-"keyword.storage.modifier" = { fg = "scale.red.3", modifiers = ["underlined"] }
+"keyword.storage.modifier" = { fg = "scale.red.3", modifiers = [
+  "bold",
+  "italic",
+  "underlined",
+] }
 "keyword.directive" = { fg = "scale.red.3", modifiers = ["italic"] }
 namespace = "scale.orange.2"
 punctuation = "fg.default"
@@ -16,7 +20,6 @@ special = "scale.blue.1"
 variable = "fg.default"
 "variable.parameter" = "scale.orange.2"
 "variable.builtin" = { fg = "scale.red.3", modifiers = ["bold"] }
-# type = { fg = "scale.orange.2" }
 type = { fg = "scale.purple.2" }
 "type.builtin" = "scale.blue.2"
 constructor = "scale.purple.2"
@@ -24,9 +27,9 @@ function = "scale.purple.2"
 "function.macro" = "scale.purple.2"
 tag = "scale.green.1"
 comment = "fg.muted"
+string = "scale.blue.1"
 constant = "scale.blue.2"
 "constant.builtin" = { fg = "scale.blue.2", modifiers = ["italic"] }
-string = "scale.blue.1"
 "constant.numeric" = "scale.blue.2"
 "constant.character.escape" = "scale.blue.2"
 # used for lifetimes

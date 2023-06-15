@@ -3,6 +3,7 @@
 !.gitignore
 !.gitmodules
 !.zshrc
+!private-build-plans.toml
 
 !/helix/
 !/helix/*

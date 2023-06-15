@@ -7,6 +7,7 @@ attribute = { fg = "done.fg", modifiers = ["bold", "italic"] }
 keyword = { fg = "scale.red.5", modifiers = ["bold", "italic"] }
 "keyword.directive" = { fg = "scale.red.5", modifiers = ["bold"] }
 "keyword.storage.modifier" = { fg = "scale.red.5", modifiers = [
+  "italic",
   "bold",
   "underlined",
 ] }
@@ -23,6 +24,7 @@ type = { fg = "scale.red.5", modifiers = ["bold"] }
 "type.builtin" = { fg = "scale.blue.6", modifiers = ["bold"] }
 constructor = { fg = "done.fg", modifiers = ["bold"] }
 function = { fg = "done.fg", modifiers = ["bold"] }
+# "function.macro" = "scale.purple.2"
 tag = { fg = "scale.green.5", modifiers = ["bold"] }
 comment = { fg = "fg.muted", modifiers = [] }
 string = { fg = "scale.blue.7", modifiers = ["bold"] }
