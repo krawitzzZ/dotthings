@@ -17,16 +17,20 @@ file-types = [
   { suffix = ".config" },
   { suffix = ".git/config" },
 ]
-language-server = { command = "nc", args = [
-  "localhost",
-  "6005",
-], language-id = "gdscript" }
+language-servers = ["gdscript"]
+[language-server.gdscript]
+command = "nc"
+args = ["localhost", "6005"]
 
 [[language]]
 name = "json"
 auto-format = false
-config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
-# formatter = { command = "prettier", args = [ "--config-precedence", "prefer-file", "--stdin-filepath", "file.json"] } default is more relaxed
+formatter = { command = "prettier", args = [
+  "--config-precedence",
+  "prefer-file",
+  "--stdin-filepath",
+  "file.json",
+] }
 
 [[language]]
 name = "html"
@@ -118,8 +122,7 @@ formatter = { command = "prettier", args = [
   "--stdin-filepath",
   "file.ts",
 ] }
-# FIXME: Multiple language servers are merged to main, but not released yet!
-# language-server = [ "typescript-language-server", "eslint" ]
+language-servers = ["eslint", "typescript-language-server"]
 
 [[language]]
 name = "tsx"
@@ -130,15 +133,16 @@ formatter = { command = "prettier", args = [
   "--stdin-filepath",
   "file.tsx",
 ] }
-# FIXME: Multiple language servers are merged to main, but not released yet!
-# language-server = [ "typescript-language-server", "eslint" ]
+language-servers = ["eslint", "typescript-language-server"]
 
 [[language]]
 name = "python"
 auto-format = false
 roots = ["pyproject.toml"]
-language-server = { command = "pyright-langserver", args = ["--stdio"] }
-config = {}
+language-servers = ["pyright-langserver"]
+[language-server.pyright-langserver]
+command = "pyright-langserver"
+args = ["--stdio"]
 
 [[language]]
 name = "haskell"
