@@ -145,7 +145,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 source "$MY_HOME"/z/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -f "$MY_HOME/.ghcup/env" ] && source "$MY_HOME/.ghcup/env" # ghcup-env
+# [ -f "$MY_HOME/.ghcup/env" ] && source "$MY_HOME/.ghcup/env" # ghcup-env
 
 # User configuration
 
@@ -157,8 +157,6 @@ export LANG=en_US.UTF-8
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vi'
-else
-  export EDITOR='hx'
 fi
 
 # Compilation flags
@@ -168,10 +166,6 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
-
-# z navigation
-eval "$(zoxide init zsh)"
 
 function killport() {
   kill -9 "$(lsof -t -i:"$1")"
@@ -187,8 +181,7 @@ function swagit() {
 }
 
 function add-ssh() {
-  ssh-add ~/.ssh/id_rsa
-  ssh-add ~/.ssh/git_rsa
+  ssh-add ~/.ssh/*
 }
 
 weather() {
@@ -203,14 +196,6 @@ weather() {
 cdl() {
     z "$1"
     ls -FGAhp --color=always
-}
-
-ss() {
-  git stash -ku
-}
-
-sr() {
-  git stash pop
 }
 
 fpath+=~/.zfunc
@@ -229,21 +214,12 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="$HOME/.ghcup/bin:$PATH"
 export PATH="$HOME/.luarocks/bin:$PATH"
 
-# emacs related stuff
-export RIPGREP_CONFIG_PATH="${MY_HOME}/.ripgreprc"
-export PATH="$HOME/.emacs.d/bin:$PATH"
-
 # node version management
 export N_PREFIX="${MY_HOME}/node-n"
 export PATH="$N_PREFIX/bin:$PATH"
 
 # shortnahd vars
 export zf="$HOME/.zshrc"
-export ncf="$HOME/.config/nvim"
-export xcf="$HOME/.config/helix"
-
-# Generated for envman for rust. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 # autostart ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
@@ -263,8 +239,6 @@ alias ls='ls -FGAhp --color=always'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
-alias python='python3'
-alias pip='pip3'
 alias ll='ls -FGlAhp --color=always'
 alias c='clear'
 alias ..='cd ../'
@@ -296,8 +270,7 @@ alias ff='goful'
 alias fm='fman'
 alias ld='lazydocker'
 alias lg='lazygit'
-alias x='hx'
-alias xz='x ~/.zshrc'
-alias xc='x ~/.config'
+alias vz='vi ~/.zshrc'
+alias vc='vi ~/.config'
 alias diff='colordiff'
 alias cat='ccat'
