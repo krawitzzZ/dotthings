@@ -8,7 +8,7 @@ while [[ $# -gt 0 ]]; do
     --skip-apps) SKIP_APPS=1 ;;
     -h|--help)
       echo "Usage: bootstrap.sh [--skip-apps]"
-      echo "  --skip-apps  skip rust/node/go/ghcup/wezterm/zed"
+      echo "  --skip-apps  skip rust/nevi/node/go/ghcup/wezterm/zed"
       exit 0
       ;;
     *)
@@ -25,13 +25,15 @@ SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 mkdir -p "$HOME/.local/bin" "$HOME/.local/share/fonts" "$HOME/go/bin"
 export PNPM_HOME="${PNPM_HOME:-$HOME/.local/pnpm}"
-export PATH="$HOME/.local/bin:$HOME/.local/node/bin:$PNPM_HOME:$PNPM_HOME/bin:$HOME/.cargo/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/.ghcup/bin:$PATH"
+export PATH="$HOME/.local/bin:$PNPM_HOME:$PNPM_HOME/bin:$HOME/.cargo/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/.ghcup/bin:$PATH"
 
 # --- apt ---
 APT_PACKAGES=(
   zsh git curl wget unzip ca-certificates fontconfig xz-utils
   build-essential wl-clipboard colordiff lsof rsync gnupg
   libatomic1 python3 openssl
+  cmake pkg-config libssl-dev zlib1g-dev
+  libx11-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 )
 
 need_apt=()
@@ -115,7 +117,7 @@ if ! have rg || ! rg --version 2>/dev/null | head -n1 | grep -Fq "$rg_tag"; then
 fi
 
 if [[ $SKIP_APPS -eq 1 ]]; then
-  echo "bootstrap: skipped rust/node/go/ghcup/wezterm/zed (--skip-apps)"
+  echo "bootstrap: skipped rust/nevi/node/go/ghcup/wezterm/zed (--skip-apps)"
   echo "bootstrap finished"
   exit 0
 fi
@@ -127,9 +129,31 @@ fi
 # shellcheck disable=SC1091
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
-# --- pnpm + Node.js LTS (bundled npm) ---
-# shellcheck source=install/node.sh
-. "$SCRIPT_DIR/install/node.sh"
+# --- nevi (terminal editor, built via cargo) ---
+if ! have nevi; then
+  cargo install --git https://github.com/anthonyamaro15/nevi
+fi
+
+# --- pnpm + Node.js (Node installed via pnpm runtime only) ---
+if ! have pnpm; then
+  curl -fsSL https://get.pnpm.io/install.sh |
+    env PNPM_HOME="$PNPM_HOME" SHELL=/bin/bash ENV="$HOME/.bashrc" bash -
+  export PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"
+fi
+
+# Node.js is managed by pnpm's runtime manager (pnpm env is deprecated;
+# use `pnpm runtime set node … -g` instead). No separate Node tarball is fetched.
+if ! have node; then
+  pnpm runtime set node lts -g
+fi
+# Since pnpm v11 the Node runtime no longer ships npm; install it via pnpm.
+if ! have npm; then
+  pnpm add -g npm
+fi
+if ! have node || ! have npm; then
+  echo "error: pnpm did not provide node/npm on PATH" >&2
+  exit 1
+fi
 
 # --- go + lazygit / lazydocker ---
 if ! have go; then

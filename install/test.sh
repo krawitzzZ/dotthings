@@ -90,7 +90,7 @@ run '
 set -euo pipefail
 rsync -a /opt/dotfiles/ "$HOME/.config/"
 bash "$HOME/.config/install.sh" --backup -y
-export PATH="$HOME/.local/bin:$HOME/.local/node/bin:$HOME/.local/pnpm:$HOME/.local/pnpm/bin:$HOME/.cargo/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/.ghcup/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/pnpm:$HOME/.local/pnpm/bin:$HOME/.cargo/bin:$HOME/.local/go/bin:$HOME/go/bin:$HOME/.ghcup/bin:$PATH"
 test -L "$HOME/.gitconfig"
 command -v rustup
 command -v cargo
@@ -110,6 +110,15 @@ command -v lazydocker
 test -e "$HOME/.ghcup/env"
 command -v wezterm
 command -v zed
+# nevi is installed via cargo (rust toolchain)
+command -v nevi
+test "$(command -v nevi)" = "$HOME/.cargo/bin/nevi"
+# Node.js must come from pnpm runtime, not the old ~/.local/node tarball.
+test ! -e "$HOME/.local/node"
+case "$(command -v node)" in
+  "$HOME/.local/pnpm"/*) ;;  # node lives under PNPM_HOME -> pnpm-managed
+  *) echo "error: node is not pnpm-managed: $(command -v node)" >&2; exit 1 ;;
+esac
 echo OK full-bootstrap
 '
 
