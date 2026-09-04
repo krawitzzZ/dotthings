@@ -12,7 +12,7 @@
     "codebook": true,
     "color-highlight": true,
     "cucumber": true,
-    "dependi": true,
+    "depsy": true,
     "docker-compose": true,
     "dockerfile": true,
     "git-firefly": true,
@@ -74,6 +74,7 @@
           "kimi-k3",
           "gemini-3.1-pro",
           "grok-4.6",
+          "glm-5.2"
         ],
       },
       "default_config_options": {
@@ -83,7 +84,7 @@
         "effort": "high",
         "fast": "false",
         "reasoning": "high",
-        "model": "grok-4.6",
+        "model": "glm-5.2",
       },
       "type": "registry",
     },
@@ -575,7 +576,7 @@
         ],
       },
     },
-    "dependi": {
+    "depsy": {
       "initialization_options": {
         "inlay_hints": {
           "enabled": true,
