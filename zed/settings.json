@@ -73,8 +73,7 @@
           "default",
           "kimi-k3",
           "gemini-3.1-pro",
-          "grok-4.6",
-          "glm-5.2"
+          "grok-4.6"
         ],
       },
       "default_config_options": {
@@ -84,7 +83,7 @@
         "effort": "high",
         "fast": "false",
         "reasoning": "high",
-        "model": "glm-5.2",
+        "model": "grok-4.6",
       },
       "type": "registry",
     },
@@ -426,7 +425,7 @@
       "hard_tabs": false,
       "format_on_save": "modifications_if_available",
       "formatter": [
-        { "code_action": "quickfix" },
+        // { "code_action": "quickfix" },
         {
           "external": {
             "command": "shfmt",

@@ -32,9 +32,6 @@ hide_when_empty = true
 block = "keyboard_layout"
 driver = "sway"
 format = " $layout "
-[block.mappings]
-"English (US)" = "English"
-"Russian (N/A)" = "Russian"
 
 # SwayNotificationCenter: left click opens the panel, right click toggles DND.
 [[block]]
@@ -62,7 +59,7 @@ format = " $icon $utilization "
 
 [[block]]
 block = "memory"
-format = " $icon $mem_total_used_percents.eng(w:2) "
+format = " $icon $mem_used_percents.eng(w:2) "
 
 [[block]]
 block = "disk_space"

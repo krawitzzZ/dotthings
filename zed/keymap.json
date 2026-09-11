@@ -681,5 +681,12 @@
     },
   },
 
+  {
+    "context": "Onboarding",
+    "unbind": {
+      "alt-shift-a": "onboarding::OpenAccount",
+    },
+  },
+
   // Changes from the UI keymap editor
 ]
